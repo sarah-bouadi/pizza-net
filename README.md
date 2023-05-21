@@ -1,4 +1,4 @@
-# pizza-net
+# pizza_net
 Design Patterns Project
 
 Une pizzeria souhaite simplifier sa prise de commande et l'élaboration de ses factures.
