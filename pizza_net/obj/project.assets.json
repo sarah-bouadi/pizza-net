@@ -8,19 +8,19 @@
     "net7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Sarah\\.nuget\\packages\\": {}
+    "/Users/soulte92/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Sarah\\RiderProjects\\pizza_net\\pizza_net\\pizza_net.csproj",
+      "projectUniqueName": "/Users/soulte92/Documents/SCHOOL/ESGI-4AL/S2/DESIGN PATTERN/PROJECTS/pizza-net/pizza_net/pizza_net.csproj",
       "projectName": "pizza_net",
-      "projectPath": "C:\\Users\\Sarah\\RiderProjects\\pizza_net\\pizza_net\\pizza_net.csproj",
-      "packagesPath": "C:\\Users\\Sarah\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Sarah\\RiderProjects\\pizza_net\\pizza_net\\obj\\",
+      "projectPath": "/Users/soulte92/Documents/SCHOOL/ESGI-4AL/S2/DESIGN PATTERN/PROJECTS/pizza-net/pizza_net/pizza_net.csproj",
+      "packagesPath": "/Users/soulte92/.nuget/packages/",
+      "outputPath": "/Users/soulte92/Documents/SCHOOL/ESGI-4AL/S2/DESIGN PATTERN/PROJECTS/pizza-net/pizza_net/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Sarah\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/soulte92/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -59,7 +59,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Users\\Sarah\\.dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/Users/soulte92/.dotnet/sdk/7.0.202/RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,4 +1,4 @@
-﻿namespace PizzeriaApp;
+namespace pizza_net;
 
 public class Pizza
 {
