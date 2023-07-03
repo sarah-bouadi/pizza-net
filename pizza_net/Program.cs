@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Text;
 
 namespace pizza_net
 {
@@ -162,6 +161,53 @@ namespace pizza_net
                 
                 // 3.3. Edition des instructions de préparation
                 InstructionEdition(orderDetails);
+                
+                // 3.6 Extension du programme : Listing des ingrédients utilisés
+                
+                // Get unique ingredients
+                List<string> uniqueIngredientsNames = new List<string>();
+                foreach (var order in orderDetails)
+                {
+                    string pizzaName = order.Key;
+                    if (! AvailablePizzas.TryGetValue(pizzaName, out var pizza))
+                    {
+                        // Error message
+                    }
+
+                    foreach (var ingredient in pizza.Ingredients)
+                    {
+                        uniqueIngredientsNames.Add(ingredient._name);
+                    }
+                }
+                uniqueIngredientsNames = uniqueIngredientsNames.Distinct().ToList();
+
+                StringBuilder displayListingIngredients = new StringBuilder();
+                foreach (var uniqueIngredientName in uniqueIngredientsNames)
+                {
+                    // Total quantity of the ingredient in all pizzas of all orders combined
+                    decimal totalQuantityValue = 0;
+                    foreach (var order in orderDetails)
+                    {
+                        // Number of orders of the pizza
+                        decimal orderQuantity = order.Value;
+                        var pizza = AvailablePizzas[order.Key];
+
+                        // Quantity of the ingredient in the pizza
+                        decimal ingredientQuantityInPizza = 0;
+                        foreach (var ingredient in pizza.Ingredients)
+                        {
+                            if (uniqueIngredientName.Equals(ingredient._name))
+                            {
+                                ingredientQuantityInPizza = ingredient._IngredientQuantity.Value;
+                                displayListingIngredients.AppendLine($"- {pizza.Name} : {ingredientQuantityInPizza * orderQuantity}");
+                                totalQuantityValue += (ingredientQuantityInPizza * orderQuantity);
+                            }
+                        }
+                    }
+                    Console.WriteLine($"{uniqueIngredientName} : {totalQuantityValue}");
+                    Console.WriteLine(displayListingIngredients.ToString());
+                    displayListingIngredients = new StringBuilder();
+                }
             }
         }
     }
