@@ -4,14 +4,6 @@ namespace pizza_net;
 
 public class Order
 {
-    public Dictionary<string, int> orderDetails;
-    public Dictionary<string, Pizza> AvailablePizzas = PizzaMenu.AvailablePizza;
-
-    public Order()
-    {
-        orderDetails = ProcessOrder();
-    }
-
     public Dictionary<string, int> ProcessOrder()
     {
         // Get order
@@ -37,7 +29,7 @@ public class Order
                 // Get order Title (pizza name)
                 var pizzaName = parts[1];
                 // Check if the pizza is available
-                if (AvailablePizzas.ContainsKey(pizzaName))
+                if (PizzaMenu.AvailablePizza.ContainsKey(pizzaName))
                 {
                     // If order already passed, Increment the quantity
                     if (orderDetails.ContainsKey(pizzaName))
@@ -79,7 +71,7 @@ public class Order
             var quantity = order.Value;
 
             // Try to get the pizza order specification
-            if (AvailablePizzas.TryGetValue(pizzaName, out var pizza))
+            if (PizzaMenu.AvailablePizza.TryGetValue(pizzaName, out var pizza))
             {
                 // Calculate and print the cost of a pizza
                 var pizzaPrice = pizza.Price * quantity;
@@ -106,14 +98,14 @@ public class Order
         {
             string pizzaName = order.Key;
 
-            if (AvailablePizzas.TryGetValue(pizzaName, out var pizza))
+            if (PizzaMenu.AvailablePizza.TryGetValue(pizzaName, out var pizza))
             {
                 Console.WriteLine(pizzaName);
                 Console.WriteLine("Préparer la pâte");
                     
                 pizza.displayAddingIngredients();
                     
-                Console.WriteLine("Cuire la pizza");
+                Console.WriteLine("Cuire la pizza\n");
             }
         }
         Console.WriteLine();
@@ -126,7 +118,7 @@ public class Order
         foreach (var order in orderDetails)
         {
             string pizzaName = order.Key;
-            if (! AvailablePizzas.TryGetValue(pizzaName, out var pizza))
+            if (! PizzaMenu.AvailablePizza.TryGetValue(pizzaName, out var pizza))
             {
                 // Error message
             }
@@ -147,7 +139,7 @@ public class Order
             {
                 // Number of orders of the pizza
                 decimal orderQuantity = order.Value;
-                var pizza = AvailablePizzas[order.Key];
+                var pizza = PizzaMenu.AvailablePizza[order.Key];
 
                 // Quantity of the ingredient in the pizza
                 decimal ingredientQuantityInPizza = 0;
