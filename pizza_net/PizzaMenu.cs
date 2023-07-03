@@ -1,8 +1,8 @@
 namespace pizza_net;
 
-public class AvailablePizza
+public class PizzaMenu
 {
-    public static readonly Dictionary<string, Pizza> GetAvailablePizza = new Dictionary<string, Pizza>
+    public static readonly Dictionary<string, Pizza> AvailablePizza = new Dictionary<string, Pizza>
     {
         { "Regina", 
             new Pizza("Regina", 8.0m, new List<Ingredient>

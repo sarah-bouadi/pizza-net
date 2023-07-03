@@ -4,45 +4,6 @@ namespace pizza_net
 {
     public class Program
     {
-        private static readonly Dictionary<string, Pizza> AvailablePizzas = new Dictionary<string, Pizza>
-        {
-            { "Regina", 
-                new Pizza("Regina", 8.0m, new List<Ingredient>
-                {  
-                    new Ingredient("tomate", new IngredientQuantityWeight(150)),
-                    new Ingredient("mozzarella", new IngredientQuantityWeight(125)),
-                    new Ingredient("fromage râpé", new IngredientQuantityWeight(100)),
-                    new Ingredient("Jambon", new IngredientQuantitySlice(2)),
-                    new Ingredient("champignons frais", new IngredientQuantityPiece(4)),
-                    new Ingredient("huile d'olive", new IngredientQuantitySpoon(2))
-                })
-            },
-            { "4 Saisons", 
-                new Pizza("4 Saisons", 9.0m,
-                    new List<Ingredient>
-                    {  
-                        new Ingredient("tomate", new IngredientQuantityWeight(150)),
-                        new Ingredient("mozzarella", new IngredientQuantityWeight(125)),
-                        new Ingredient("Jambon", new IngredientQuantitySlice(2)),
-                        new Ingredient("champignons frais", new IngredientQuantityWeight(100)),
-                        new Ingredient("poivron", new IngredientQuantityPiece(0.5m)),
-                        new Ingredient("olives", new IngredientQuantityWrist(1))
-                    })
-            },
-            { "Végétarienne", 
-                new Pizza("Végétarienne", 7.5m, 
-                    new List<Ingredient>
-                    {  
-                        new Ingredient("tomate", new IngredientQuantityWeight(150)),
-                        new Ingredient("mozzarella", new IngredientQuantityWeight(100)),
-                        new Ingredient("courgette", new IngredientQuantityPiece(0.5m)),
-                        new Ingredient("poivron jaune", new IngredientQuantityPiece(1)),
-                        new Ingredient("tomates cerises", new IngredientQuantityPiece(6)),
-                        new Ingredient("olives", new IngredientQuantityWrist(1))
-                    })
-            }
-        };
-
         public static Dictionary<string, int> ProcessOrder()
         {
             // Get order
@@ -68,7 +29,7 @@ namespace pizza_net
                     // Get order Title (pizza name)
                     var pizzaName = parts[1];
                     // Check if the pizza is available
-                    if (AvailablePizzas.ContainsKey(pizzaName))
+                    if (PizzaMenu.AvailablePizza.ContainsKey(pizzaName))
                     {
                         // If order already passed, Increment the quantity
                         if (orderDetails.ContainsKey(pizzaName))
@@ -110,7 +71,7 @@ namespace pizza_net
                 var quantity = order.Value;
 
                 // Try to get the pizza order specification
-                if (AvailablePizzas.TryGetValue(pizzaName, out var pizza))
+                if (PizzaMenu.AvailablePizza.TryGetValue(pizzaName, out var pizza))
                 {
                     // Calculate and print the cost of a pizza
                     var pizzaPrice = pizza.Price * quantity;
@@ -137,7 +98,7 @@ namespace pizza_net
             {
                 string pizzaName = order.Key;
 
-                if (AvailablePizzas.TryGetValue(pizzaName, out var pizza))
+                if (PizzaMenu.AvailablePizza.TryGetValue(pizzaName, out var pizza))
                 {
                     Console.WriteLine(pizzaName);
                     Console.WriteLine("Préparer la pâte");
@@ -156,7 +117,7 @@ namespace pizza_net
             foreach (var order in orderDetails)
             {
                 string pizzaName = order.Key;
-                if (! AvailablePizzas.TryGetValue(pizzaName, out var pizza))
+                if (! PizzaMenu.AvailablePizza.TryGetValue(pizzaName, out var pizza))
                 {
                     // Error message
                 }
@@ -177,7 +138,7 @@ namespace pizza_net
                 {
                     // Number of orders of the pizza
                     decimal orderQuantity = order.Value;
-                    var pizza = AvailablePizzas[order.Key];
+                    var pizza = PizzaMenu.AvailablePizza[order.Key];
 
                     // Quantity of the ingredient in the pizza
                     decimal ingredientQuantityInPizza = 0;

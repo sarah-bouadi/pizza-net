@@ -5,7 +5,7 @@ namespace pizza_net;
 public class Order
 {
     public Dictionary<string, int> orderDetails;
-    public Dictionary<string, Pizza> AvailablePizzas = AvailablePizza.GetAvailablePizza;
+    public Dictionary<string, Pizza> AvailablePizzas = PizzaMenu.AvailablePizza;
 
     public Order()
     {
