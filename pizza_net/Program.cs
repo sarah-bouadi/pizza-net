@@ -97,7 +97,7 @@ namespace pizza_net
             return orderDetails;
         }
 
-        public static void InvoiceEdition(Dictionary<string, int> orderDetails)
+        public static void EditInvoice(Dictionary<string, int> orderDetails)
         {
             Console.WriteLine("\nFacture :");
             decimal totalPrice = 0;
@@ -128,7 +128,7 @@ namespace pizza_net
             Console.WriteLine($"Prix total : {totalPrice:C}");
         }
 
-        public static void InstructionEdition(Dictionary<string, int> orderDetails)
+        public static void EditInstruction(Dictionary<string, int> orderDetails)
         {
             Console.WriteLine("\nInstructions de préparation :");
                 
@@ -148,66 +148,71 @@ namespace pizza_net
                 }
             }
         }
+
+        public static void ListUsedIngredient(Dictionary<string, int> orderDetails)
+        {
+            // Get unique ingredients
+            List<string> uniqueIngredientsNames = new List<string>();
+            foreach (var order in orderDetails)
+            {
+                string pizzaName = order.Key;
+                if (! AvailablePizzas.TryGetValue(pizzaName, out var pizza))
+                {
+                    // Error message
+                }
+
+                foreach (var ingredient in pizza.Ingredients)
+                {
+                    uniqueIngredientsNames.Add(ingredient._name);
+                }
+            }
+            uniqueIngredientsNames = uniqueIngredientsNames.Distinct().ToList();
+
+            StringBuilder displayListingIngredients = new StringBuilder();
+            foreach (var uniqueIngredientName in uniqueIngredientsNames)
+            {
+                // Total quantity of the ingredient in all pizzas of all orders combined
+                decimal totalQuantityValue = 0;
+                foreach (var order in orderDetails)
+                {
+                    // Number of orders of the pizza
+                    decimal orderQuantity = order.Value;
+                    var pizza = AvailablePizzas[order.Key];
+
+                    // Quantity of the ingredient in the pizza
+                    decimal ingredientQuantityInPizza = 0;
+                    foreach (var ingredient in pizza.Ingredients)
+                    {
+                        if (uniqueIngredientName.Equals(ingredient._name))
+                        {
+                            ingredientQuantityInPizza = ingredient._IngredientQuantity.Value;
+                            displayListingIngredients.AppendLine($"- {pizza.Name} : {ingredientQuantityInPizza * orderQuantity}");
+                            totalQuantityValue += (ingredientQuantityInPizza * orderQuantity);
+                        }
+                    }
+                }
+                Console.WriteLine($"{uniqueIngredientName} : {totalQuantityValue}");
+                Console.WriteLine(displayListingIngredients.ToString());
+                displayListingIngredients = new StringBuilder();
+            }
+        }
         
         public static void Main()
         {
+            // 3.5 Comportement attendu du programme
             while (true)
             {
                 // 3.1 Prise en compte des commandes 
                 var orderDetails = ProcessOrder();
 
                 // 3.2 Edition d'une facture 
-                InvoiceEdition(orderDetails);
+                EditInvoice(orderDetails);
                 
                 // 3.3. Edition des instructions de préparation
-                InstructionEdition(orderDetails);
+                EditInstruction(orderDetails);
                 
                 // 3.6 Extension du programme : Listing des ingrédients utilisés
-                
-                // Get unique ingredients
-                List<string> uniqueIngredientsNames = new List<string>();
-                foreach (var order in orderDetails)
-                {
-                    string pizzaName = order.Key;
-                    if (! AvailablePizzas.TryGetValue(pizzaName, out var pizza))
-                    {
-                        // Error message
-                    }
-
-                    foreach (var ingredient in pizza.Ingredients)
-                    {
-                        uniqueIngredientsNames.Add(ingredient._name);
-                    }
-                }
-                uniqueIngredientsNames = uniqueIngredientsNames.Distinct().ToList();
-
-                StringBuilder displayListingIngredients = new StringBuilder();
-                foreach (var uniqueIngredientName in uniqueIngredientsNames)
-                {
-                    // Total quantity of the ingredient in all pizzas of all orders combined
-                    decimal totalQuantityValue = 0;
-                    foreach (var order in orderDetails)
-                    {
-                        // Number of orders of the pizza
-                        decimal orderQuantity = order.Value;
-                        var pizza = AvailablePizzas[order.Key];
-
-                        // Quantity of the ingredient in the pizza
-                        decimal ingredientQuantityInPizza = 0;
-                        foreach (var ingredient in pizza.Ingredients)
-                        {
-                            if (uniqueIngredientName.Equals(ingredient._name))
-                            {
-                                ingredientQuantityInPizza = ingredient._IngredientQuantity.Value;
-                                displayListingIngredients.AppendLine($"- {pizza.Name} : {ingredientQuantityInPizza * orderQuantity}");
-                                totalQuantityValue += (ingredientQuantityInPizza * orderQuantity);
-                            }
-                        }
-                    }
-                    Console.WriteLine($"{uniqueIngredientName} : {totalQuantityValue}");
-                    Console.WriteLine(displayListingIngredients.ToString());
-                    displayListingIngredients = new StringBuilder();
-                }
+                ListUsedIngredient(orderDetails);
             }
         }
     }
