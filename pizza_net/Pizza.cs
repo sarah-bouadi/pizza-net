@@ -14,12 +14,7 @@ public class Pizza
         Ingredients = ingredients;
     }
 
-    public void displayPizzaPricePerQuantity(int nbPizza)
-    {
-        Console.WriteLine($"{nbPizza} {Name} : {nbPizza} * {Price:C}");
-    }
-
-    public void displayAddingIngredients()
+    public void DisplayAddingIngredients()
     {
         foreach (var ingredient in Ingredients)
         {
