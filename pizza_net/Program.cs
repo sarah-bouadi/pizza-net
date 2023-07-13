@@ -21,20 +21,17 @@ namespace pizza_net
 
         public static void Main()
         {
-            // CommandLineReader fileReader = new CommandLineReader();
-            // List<string> orders = fileReader.ReadFileLines();
+            // string filePath = "";
             
-            // string filePath = "/Users/soulte92/Documents/SCHOOL/ESGI-4AL/S2/DESIGN PATTERN/PROJECTS/pizza-net/pizza_net/testPizzaMenu.txt"; // Replace with the actual file path
-            // TextFileReader fileReader = new TextFileReader();
-            // List<string> orders = fileReader.ReadFileLines(filePath);
+            // string filePath = "/Users/soulte92/Documents/SCHOOL/ESGI-4AL/S2/DESIGN PATTERN/PROJECTS/pizza-net/pizza_net/testPizzaMenu.txt";
+            // var fileReader = FileReaderFactory.CreateFileReader("TXT");
+            //
+            // string filePath = "/Users/soulte92/Documents/SCHOOL/ESGI-4AL/S2/DESIGN PATTERN/PROJECTS/pizza-net/pizza_net/testPizzaMenu.json";
+            // var fileReader = FileReaderFactory.CreateFileReader("JSON");
             
-            // string filePath = "/Users/soulte92/Documents/SCHOOL/ESGI-4AL/S2/DESIGN PATTERN/PROJECTS/pizza-net/pizza_net/testPizzaMenu.json"; // Replace with the actual file path
-            // JsonFileReader fileReader = new JsonFileReader();
-            // List<string> orders = fileReader.ReadFileLines(filePath);
-            // Console.WriteLine(orders);
+            string filePath = "/Users/soulte92/Documents/SCHOOL/ESGI-4AL/S2/DESIGN PATTERN/PROJECTS/pizza-net/pizza_net/testPizzaMenu.xml";
+            var fileReader = FileReaderFactory.CreateFileReader("XML");
             
-            string filePath = "/Users/soulte92/Documents/SCHOOL/ESGI-4AL/S2/DESIGN PATTERN/PROJECTS/pizza-net/pizza_net/testPizzaMenu.xml"; // Replace with the actual file path
-            XmlFileReader fileReader = new XmlFileReader();
             List<string> orders = fileReader.ReadFileLines(filePath);
 
             var orderProcessor = new OrderProcessor(PizzaMenu.AvailablePizza);
@@ -51,7 +48,6 @@ namespace pizza_net
                 {
                     break;
                 }
-            
                 // Read new orders for CommandLineReader
                 orders = fileReader.ReadFileLines(filePath); 
             }
