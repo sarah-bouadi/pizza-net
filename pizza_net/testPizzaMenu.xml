@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<orders>
+    <order>
+        <product>
+            <name>Regina</name>
+            <quantity>3</quantity>
+        </product>
+        <product>
+            <name>Végétarienne</name>
+            <quantity>4</quantity>
+        </product>
+    </order>
+    <order>
+        <product>
+            <name>Végétarienne</name>
+            <quantity>2</quantity>
+        </product>
+        <product>
+            <name>Regina</name>
+            <quantity>1</quantity>
+        </product>
+    </order>
+</orders>
