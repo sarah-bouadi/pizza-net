@@ -2,18 +2,23 @@ using System.Text;
 
 namespace pizza_net;
 
-public class Order
+public class OrderProcessor
 {
-    public Dictionary<string, int> ProcessOrder()
+    private Dictionary<string, Pizza> _AvailablePizza;
+
+    public OrderProcessor(Dictionary<string, Pizza> availablePizza)
     {
-        // Get order
-        Console.WriteLine("Entrez votre commande :");
-        var input = Console.ReadLine();
-        if (string.IsNullOrWhiteSpace(input))
+        _AvailablePizza = availablePizza;
+    }
+
+    public Dictionary<string, int> ParseOrders(string inputOrders)
+    {
+        // Get orders
+        if (string.IsNullOrWhiteSpace(inputOrders))
             return null;
         
         // Transform command line input to list of order
-        string[] orders = input.Split(',');
+        string[] orders = inputOrders.Split(',');
 
         var orderDetails = new Dictionary<string, int>();
 
@@ -29,7 +34,7 @@ public class Order
                 // Get order Title (pizza name)
                 var pizzaName = parts[1];
                 // Check if the pizza is available
-                if (PizzaMenu.AvailablePizza.ContainsKey(pizzaName))
+                if (_AvailablePizza.ContainsKey(pizzaName))
                 {
                     // If order already passed, Increment the quantity
                     if (orderDetails.ContainsKey(pizzaName))
@@ -58,8 +63,11 @@ public class Order
         return orderDetails;
     }
 
+
     public void EditInvoice(Dictionary<string, int> orderDetails)
     {
+        Console.WriteLine("-- Edition de la commande --");
+
         Console.WriteLine("\nFacture :");
         decimal totalPrice = 0;
             
@@ -71,7 +79,7 @@ public class Order
             var quantity = order.Value;
 
             // Try to get the pizza order specification
-            if (PizzaMenu.AvailablePizza.TryGetValue(pizzaName, out var pizza))
+            if (_AvailablePizza.TryGetValue(pizzaName, out var pizza))
             {
                 // Calculate and print the cost of a pizza
                 var pizzaPrice = pizza.Price * quantity;
@@ -91,6 +99,8 @@ public class Order
 
     public void EditInstruction(Dictionary<string, int> orderDetails)
     {
+        Console.WriteLine("-- Edition des intructions de préparation la commande --");
+
         Console.WriteLine("\nInstructions de préparation :");
             
         // For each order print how to prepare the pizza
@@ -98,12 +108,12 @@ public class Order
         {
             string pizzaName = order.Key;
 
-            if (PizzaMenu.AvailablePizza.TryGetValue(pizzaName, out var pizza))
+            if (_AvailablePizza.TryGetValue(pizzaName, out var pizza))
             {
                 Console.WriteLine(pizzaName);
                 Console.WriteLine("Préparer la pâte");
                     
-                pizza.displayAddingIngredients();
+                pizza.DisplayAddingIngredients();
                     
                 Console.WriteLine("Cuire la pizza\n");
             }
@@ -113,12 +123,14 @@ public class Order
 
     public void ListUsedIngredient(Dictionary<string, int> orderDetails)
     {
+        Console.WriteLine("-- Liste des ingrédients utilisées --");
+
         // Get unique ingredients
         List<string> uniqueIngredientsNames = new List<string>();
         foreach (var order in orderDetails)
         {
             string pizzaName = order.Key;
-            if (! PizzaMenu.AvailablePizza.TryGetValue(pizzaName, out var pizza))
+            if (! _AvailablePizza.TryGetValue(pizzaName, out var pizza))
             {
                 // Error message
             }
@@ -139,7 +151,7 @@ public class Order
             {
                 // Number of orders of the pizza
                 decimal orderQuantity = order.Value;
-                var pizza = PizzaMenu.AvailablePizza[order.Key];
+                var pizza = _AvailablePizza[order.Key];
 
                 // Quantity of the ingredient in the pizza
                 decimal ingredientQuantityInPizza = 0;
