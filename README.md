@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-# pizza_net
-=======
 # pizza-net
->>>>>>> feature/initialization
 Design Patterns Project
 
 Une pizzeria souhaite simplifier sa prise de commande et l'élaboration de ses factures.
