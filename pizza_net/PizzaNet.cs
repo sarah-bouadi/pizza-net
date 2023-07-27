@@ -84,9 +84,6 @@ public class PizzaNet
 
         // 3.2 Edition d'une facture 
         orderProcessor.EditInvoice(orderDetails, targetFilePath);
-        
-        // // Module Gestion de Sorties 
-        // Console.WriteLine(orderProcessor.DownloadInvoice(orderDetails));
 
         // 3.3. Edition des instructions de préparation
         orderProcessor.EditInstruction(orderDetails);

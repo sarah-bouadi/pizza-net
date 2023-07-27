@@ -50,6 +50,7 @@ public class TextInvoiceOutput : IInvoiceOutput
                     writer.WriteLine(invoiceOutput);
                 }
             }
+            Console.WriteLine("Text invoice has been generated and saved to '" + targetFilePath + "'.");
         }
         catch (Exception ex)
         {

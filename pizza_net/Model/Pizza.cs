@@ -4,7 +4,6 @@ public class Pizza
 {
     public string Name { get; }
     public decimal Price { get; }
-    // public Dictionary<string, decimal> Ingredients { get; }
     public List<Ingredient> Ingredients { get; }
 
     public Pizza(string name, decimal price, List<Ingredient> ingredients)
