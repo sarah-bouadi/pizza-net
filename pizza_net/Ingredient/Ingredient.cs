@@ -11,8 +11,8 @@ public class Ingredient
         _IngredientQuantity = ingredientQuantity;
     }
 
-    public void DisplayIngredient()
+    public string DisplayIngredient()
     {
-        Console.WriteLine($"{_name} {_IngredientQuantity.DisplayQuantity()}");
+        return $"{_name} {_IngredientQuantity.DisplayQuantity()}";
     }
 }

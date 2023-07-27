@@ -15,6 +15,11 @@ public class IngredientQuantitySlice : IngredientQuantity
         {
             manySlices = "s";
         }
-        return $"{Value} tranche{manySlices}";
+        return $"{Value} {getQuantityType()}{manySlices}";
+    }
+    
+    public string getQuantityType()
+    {
+        return "tranche";
     }
 }

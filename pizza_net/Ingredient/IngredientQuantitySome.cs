@@ -10,6 +10,11 @@ public class IngredientQuantitySome: IngredientQuantity
     }
     public string DisplayQuantity()
     {
-        return $"quelques";
+        return getQuantityType();
+    }
+    
+    public string getQuantityType()
+    {
+        return "quelques";
     }
 }

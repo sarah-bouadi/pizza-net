@@ -10,6 +10,11 @@ public class IngredientQuantityWeight : IngredientQuantity
     public decimal Value { get; }
     public string DisplayQuantity()
     {
-        return $"{Value} g";
+        return $"{Value} {getQuantityType()}";
+    }
+    
+    public string getQuantityType()
+    {
+        return "g";
     }
 }

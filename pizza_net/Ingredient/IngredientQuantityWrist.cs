@@ -15,7 +15,12 @@ public class IngredientQuantityWrist : IngredientQuantity
         {
             manyWrist = "s";
         }
-        return $"{Value} poignée{manyWrist}";
+        return $"{Value} {getQuantityType()}{manyWrist}";
         
+    }
+    
+    public string getQuantityType()
+    {
+        return "poignée";
     }
 }

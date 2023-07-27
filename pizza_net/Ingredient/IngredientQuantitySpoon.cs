@@ -17,4 +17,9 @@ public class IngredientQuantitySpoon : IngredientQuantity
         }
         return $"{Value} cuillière{manySpoon} à soupe";    
     }
+    
+    public string getQuantityType()
+    {
+        return "cuillière à soupe";
+    }
 }

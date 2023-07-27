@@ -5,10 +5,16 @@ namespace pizza_net;
 public class OrderProcessor
 {
     private Dictionary<string, Pizza> _AvailablePizza;
+    private IInvoiceOutput _invoiceOutput;
 
     public OrderProcessor(Dictionary<string, Pizza> availablePizza)
     {
         _AvailablePizza = availablePizza;
+    }
+    
+    public void SetInvoiceOutput(IInvoiceOutput invoiceOutput)
+    {
+        _invoiceOutput = invoiceOutput;
     }
 
     public Dictionary<string, int> ParseOrders(string inputOrders)
@@ -64,37 +70,14 @@ public class OrderProcessor
     }
 
 
-    public void EditInvoice(Dictionary<string, int> orderDetails)
+    public void EditInvoice(Dictionary<string, int> orderDetails, string targetFilePath)
     {
         Console.WriteLine("-- Edition de la commande --");
 
         Console.WriteLine("\nFacture :");
-        decimal totalPrice = 0;
-            
-        // For each order of our list
-        foreach (var order in orderDetails)
-        {   
-            // Get the order title and its quantity
-            var pizzaName = order.Key;
-            var quantity = order.Value;
 
-            // Try to get the pizza order specification
-            if (_AvailablePizza.TryGetValue(pizzaName, out var pizza))
-            {
-                // Calculate and print the cost of a pizza
-                var pizzaPrice = pizza.Price * quantity;
-                totalPrice += pizzaPrice;
-                Console.WriteLine($"{quantity} {pizzaName} : {quantity} * {pizza.Price:C}");
-                    
-                // Print the specification of the 
-                foreach (var ingredient in pizza.Ingredients)
-                {
-                    ingredient.DisplayIngredient();
-                }
-            }
-        }
-        // Print the total cost
-        Console.WriteLine($"Prix total : {totalPrice:C}");
+        // Generate Invoice
+        _invoiceOutput.GenerateInvoice(orderDetails, targetFilePath);
     }
 
     public void EditInstruction(Dictionary<string, int> orderDetails)
