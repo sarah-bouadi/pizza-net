@@ -4,8 +4,8 @@
     {
         public static void Main()
         {
-            string relativeFilePath = @"";
-            string relativeTargetFilePath = @"";
+            // string relativeFilePath = @"";
+            // string relativeTargetFilePath = @"";
             
             // string relativeFilePath = @"..testPizzaMenu.txt";
             // string relativeTargetFilePath = @"..invoice_testPizzaMenu.txt";
@@ -13,8 +13,8 @@
             // string relativeFilePath = @"..testPizzaMenu.json";
             // string relativeTargetFilePath = @"..invoice_testPizzaMenu.json";
             
-            // string relativeFilePath = @"..testPizzaMenu.xml";
-            // string relativeTargetFilePath = @"..invoice_testPizzaMenu.xml";
+            string relativeFilePath = @"..testPizzaMenu.xml";
+            string relativeTargetFilePath = @"..invoice_testPizzaMenu.xml";
             
             // Get Absolute path
             string baseDirectory = Directory.GetCurrentDirectory();
