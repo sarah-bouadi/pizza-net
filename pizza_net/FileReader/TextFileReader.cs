@@ -8,7 +8,6 @@ public class TextFileReader : FileReader
         
         try
         {
-            // Read all lines from the file
             lines = File.ReadAllLines(filePath).ToList();
         }
         catch (Exception ex)

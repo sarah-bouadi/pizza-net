@@ -4,11 +4,9 @@ public class PizzaNet
 {
     public void launchPizzeria(string filePath, string targetFilePath)
     {
-        // Create and Read file content
         var fileReader = FileReaderFactory.CreateFileReader(GetFileType(filePath));
         List<string> orders = fileReader.ReadFileLines(filePath);
 
-        // Create Invoice Output
         IInvoiceOutput invoiceOutput = getInvoiceOutput(fileReader);
 
         var orderProcessor = new OrderProcessor(PizzaMenu.AvailablePizza);
@@ -27,14 +25,12 @@ public class PizzaNet
             {
                 break;
             }
-            // Read new orders for CommandLineReader
             orders = fileReader.ReadFileLines(filePath); 
         }
     }
 
     public IInvoiceOutput getInvoiceOutput(FileReader fileReader)
     {
-        // Create the concrete component based on the file type
         IInvoiceOutput concreteComponent;
         if (fileReader is JsonFileReader)
         {
@@ -50,11 +46,9 @@ public class PizzaNet
         }
         else
         {
-            // Default to console output if the file type is not JSON or XML
             concreteComponent = new ConsoleInvoiceOutput();
         }
 
-        // Optionally, apply decorators to the concrete component
         return new InvoiceHeaderDecorator(concreteComponent);
     }
 

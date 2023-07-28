@@ -12,7 +12,6 @@ public class XmlInvoiceOutput : IInvoiceOutput
         {
             XmlDocument xmlDoc = new XmlDocument();
             XmlElement ordersElement;
-            // If the XML file already exists, load it
             if (File.Exists(targetFilePath))
             {
                 xmlDoc.Load(targetFilePath);
@@ -20,7 +19,6 @@ public class XmlInvoiceOutput : IInvoiceOutput
             }
             else
             {
-                // If the XML file doesn't exist, create a new XML document
                 XmlDeclaration xmlDeclaration = xmlDoc.CreateXmlDeclaration("1.0", "utf-8", null);
                 xmlDoc.AppendChild(xmlDeclaration);
 
