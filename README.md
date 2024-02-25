@@ -1,5 +1,5 @@
 # pizza-net
-Design Patterns Project
+Design Patterns Project.
 
 Une pizzeria souhaite simplifier sa prise de commande et l'élaboration de ses factures.
 Chaque pizza est constituée d'une liste précise d'ingrédients et possède un prix.
